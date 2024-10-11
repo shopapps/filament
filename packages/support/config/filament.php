@@ -86,4 +86,29 @@ return [
 
     'livewire_loading_delay' => 'default',
 
+    /*
+        |--------------------------------------------------------------------------
+        | Content Security Policy
+        |--------------------------------------------------------------------------
+        | if enabled this will add a "nonce='xxxxx'" attribute to the script and style tags
+        | to allow the browser to execute only scripts that have the nonce attribute
+        | this is a security measure to prevent XSS attacks.
+        |
+        | You will also need to enable CSP headers in your application via middleware
+        | or use a package like spatie/laravel-csp https://github.com/spatie/laravel-csp
+        | if using spatie/laravel-csp you should set the generator function to 'csp_nonce'
+        |
+        | If setting your own CSP headers you should set the generator function to your own function
+        | or use filament_csp_nonce() when generating your CSP header nonce value
+        |
+        | see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+     */
+    'content_security_policy' => [
+        'nonce' => [
+            'enabled' => env('FILAMENT_NONCE_ENABLED', false),
+            'generator_function' => env('FILAMENT_NONCE_GENERATOR', null), // defaults to filament_csp_nonce() => Str::random(32)
+        ]
+    ],
+
+
 ];

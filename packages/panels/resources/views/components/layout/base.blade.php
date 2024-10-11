@@ -33,7 +33,7 @@
 
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::STYLES_BEFORE, scopes: $livewire->getRenderHookScopes()) }}
 
-        <style>
+        <style {{ filament_nonce_str() }} >
             [x-cloak=''],
             [x-cloak='x-cloak'],
             [x-cloak='1'] {
@@ -58,7 +58,7 @@
         {{ filament()->getTheme()->getHtml() }}
         {{ filament()->getFontHtml() }}
 
-        <style>
+        <style {{ filament_nonce_str() }} >
             :root {
                 --font-family: '{!! filament()->getFontFamily() !!}';
                 --sidebar-width: {{ filament()->getSidebarWidth() }};
@@ -72,15 +72,15 @@
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::STYLES_AFTER, scopes: $livewire->getRenderHookScopes()) }}
 
         @if (! filament()->hasDarkMode())
-            <script>
+            <script {{ filament_nonce_str() }} >
                 localStorage.setItem('theme', 'light')
             </script>
         @elseif (filament()->hasDarkModeForced())
-            <script>
+            <script {{ filament_nonce_str() }} >
                 localStorage.setItem('theme', 'dark')
             </script>
         @else
-            <script>
+            <script {{ filament_nonce_str() }} >
                 const theme = localStorage.getItem('theme') ?? @js(filament()->getDefaultThemeMode()->value)
 
                 if (
@@ -117,7 +117,7 @@
         @filamentScripts(withCore: true)
 
         @if (filament()->hasBroadcasting() && config('filament.broadcasting.echo'))
-            <script data-navigate-once>
+            <script  {{ filament_nonce_str() }} data-navigate-once>
                 window.Echo = new window.EchoFactory(@js(config('filament.broadcasting.echo')))
 
                 window.dispatchEvent(new CustomEvent('EchoLoaded'))

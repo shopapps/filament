@@ -9,14 +9,14 @@
 
         <title>{{ config('app.name') }}</title>
 
-        <style>[x-cloak] { display: none !important; }</style>
-        @filamentStyles
+        <style {{ filament_nonce_str() }} >[x-cloak] { display: none !important; }</style>
+        @filamentStyles([filament_nonce_arr()])
         @vite('resources/css/app.css')
 
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700&amp;display=swap" rel="stylesheet">
+        <link {{ filament_nonce_str() }} rel="preconnect" href="https://fonts.bunny.net">
+        <link {{ filament_nonce_str() }} href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700&amp;display=swap" rel="stylesheet">
 
-        <script>
+        <script {{ filament_nonce_str() }} >
             if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 document.documentElement.classList.add('dark')
             }
@@ -36,9 +36,9 @@
     <body class="antialiased bg-gray-50 text-gray-950 dark:text-white dark:bg-gray-950">
         {{ $slot }}
 
-        @livewire('notifications')
+        @livewire('notifications', filament_nonce_arr())
 
-        @filamentScripts
+        @filamentScripts(filament_nonce_arr())
         @vite('resources/js/app.js')
     </body>
 </html>

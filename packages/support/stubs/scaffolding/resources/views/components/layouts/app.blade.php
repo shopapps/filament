@@ -9,20 +9,20 @@
 
         <title>{{ config('app.name') }}</title>
 
-        <style>
+        <style {{ filament_nonce_str() }} >
             [x-cloak] {
                 display: none !important;
             }
         </style>
 
-        @filamentStyles
+        @filamentStyles(filament_nonce_arr())
         @vite('resources/css/app.css')
     </head>
 
     <body class="antialiased">
         {{ $slot }}
 
-        @filamentScripts
+        @filamentScripts(filament_nonce_arr())
         @vite('resources/js/app.js')
     </body>
 </html>

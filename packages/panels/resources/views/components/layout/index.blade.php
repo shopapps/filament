@@ -95,7 +95,7 @@
                 class="fi-main-sidebar"
             />
 
-            <script>
+            <script {{ filament_nonce_str() }} >
                 document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
                         let activeSidebarItem = document.querySelector(

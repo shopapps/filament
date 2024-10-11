@@ -1,6 +1,6 @@
 @if (filament()->hasUnsavedChangesAlerts())
     @script
-        <script>
+        <script {{ filament_nonce_str() }} >
             window.addEventListener('beforeunload', (event) => {
                 if (typeof @this === 'undefined') {
                     return

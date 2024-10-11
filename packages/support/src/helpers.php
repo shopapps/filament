@@ -219,3 +219,37 @@ if (! function_exists('Filament\Support\generate_search_term_expression')) {
         return Str::lower($search);
     }
 }
+
+
+if(!function_exists('filament_csp_nonce')){
+    function filament_csp_nonce(): string
+    {
+        $nonce_function = config('filament.nonce.generator_function'); // default csp_nonce()
+        if(function_exists($nonce_function)){
+            return $nonce_function();
+        }
+        return Str::random(32);
+    }
+}
+
+if(!function_exists('filament_nonce_str')){
+    function filament_nonce_str(): string
+    {
+        if(config('filament.nonce.enabled')){
+            return 'nonce="'.filament_csp_nonce().'"';
+        }
+        return '';
+    }
+}
+
+if(!function_exists('filament_nonce_arr')) {
+    function filament_nonce_arr(): array
+    {
+        if(config('filament.nonce.enabled')){
+            return [
+                'nonce' => filament_csp_nonce()
+            ];
+        }
+        return [];
+    }
+}

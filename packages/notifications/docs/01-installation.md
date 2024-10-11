@@ -126,7 +126,7 @@ Create a new `resources/views/components/layouts/app.blade.php` layout file for 
 
         <title>{{ config('app.name') }}</title>
 
-        <style>
+        <style {{ filament_nonce_str() }} >
             [x-cloak] {
                 display: none !important;
             }

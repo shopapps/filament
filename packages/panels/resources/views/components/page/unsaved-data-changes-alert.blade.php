@@ -5,7 +5,7 @@
 @if ($this->hasUnsavedDataChangesAlert())
     @if (FilamentView::hasSpaMode())
         @script
-            <script>
+            <script {{ filament_nonce_str() }} >
                 let formSubmitted = false
 
                 document.addEventListener(
@@ -56,7 +56,7 @@
         @endscript
     @else
         @script
-            <script>
+            <script {{ filament_nonce_str() }} >
                 window.addEventListener('beforeunload', (event) => {
                     if (
                         window.jsMd5(

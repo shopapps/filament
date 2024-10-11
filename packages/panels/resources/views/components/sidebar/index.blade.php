@@ -129,7 +129,7 @@
             @endforeach
         </ul>
 
-        <script>
+        <script {{ filament_nonce_str() }} >
             var collapsedGroups = JSON.parse(
                 localStorage.getItem('collapsedGroups'),
             )

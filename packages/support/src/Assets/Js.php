@@ -107,6 +107,13 @@ class Js extends Asset
         $html = $this->html;
 
         if (str($html)->contains('<script')) {
+            /*
+             * look for nonce= in the $html and apply  filament_nonce_str() if not
+             */
+            if(!str($html)->contains('nonce=')) {
+                $html = str($html)->replaceFirst('<script', '<script ' . filament_nonce_str() . ' ');
+            }
+
             return $html instanceof Htmlable ? $html : new HtmlString($html);
         }
 
@@ -125,6 +132,7 @@ class Js extends Asset
         return new HtmlString(
             "
             <script
+                ".filament_nonce_str()."
                 src=\"{$html}\"
                 {$async}
                 {$defer}
